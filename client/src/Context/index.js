@@ -6,12 +6,18 @@ export const Context = React.createContext();
 export const Provider = (props) => {
   const data = new Data();
 
-  const signIn = async () => {};
+  const signIn = async (emailAddress, password) => {
+    const user = await data.getUser(emailAddress, password);
+    return user;
+  };
 
   const signOut = () => {};
 
   const value = {
     data,
+    actions: {
+      signIn,
+    },
   };
 
   return <Context.Provider value={value}>{props.children}</Context.Provider>;

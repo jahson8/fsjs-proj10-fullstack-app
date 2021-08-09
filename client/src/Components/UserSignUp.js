@@ -9,10 +9,11 @@ const UserSignUp = () => {
   const history = useHistory();
 
   //* State variables
-  const [email, setEmail] = useState("");
+  const [emailAddress, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [confirmedPassword, setConfirmedPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
   //* handles input values and updates state as form is filled
@@ -35,7 +36,7 @@ const UserSignUp = () => {
         setPassword(value);
         break;
       default:
-        return;
+        setConfirmedPassword(value);
     }
   };
 
@@ -45,8 +46,9 @@ const UserSignUp = () => {
     const user = {
       firstName,
       lastName,
-      email,
+      emailAddress,
       password,
+      confirmedPassword,
     };
 
     data
@@ -54,9 +56,10 @@ const UserSignUp = () => {
       .then((errors) => {
         if (errors.length) {
           setErrors(errors);
-          console.log(errors);
         } else {
-          console.log(`${email} is successfully signed up and Authenticated!`);
+          console.log(
+            `${emailAddress} is successfully signed up and Authenticated!`
+          );
         }
       })
       .catch((err) => {
@@ -108,7 +111,7 @@ const UserSignUp = () => {
             name="emailAddress"
             type="email"
             onChange={handleValueChange}
-            value={email}
+            value={emailAddress}
           />
           <label htmlFor="password">Password</label>
           <input
@@ -117,6 +120,15 @@ const UserSignUp = () => {
             type="password"
             onChange={handleValueChange}
             value={password}
+          />
+
+          <label htmlFor="confirmedPassword">Confirm Password</label>
+          <input
+            id="confirmedPassword"
+            name="confirmedPassword"
+            type="password"
+            onChange={handleValueChange}
+            value={confirmedPassword}
           />
           <button className="button" type="submit">
             Sign Up

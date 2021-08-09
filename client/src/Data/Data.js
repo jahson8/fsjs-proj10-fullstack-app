@@ -90,6 +90,7 @@ export default class Data {
 
   //* Create a user
   async createUser(user) {
+    console.log(user);
     const response = await this.api("/users", "POST", user);
 
     if (response.status === 201) {
