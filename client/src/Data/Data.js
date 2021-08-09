@@ -1,0 +1,87 @@
+import config from "./config";
+
+export default class Data {
+  api(path, method = "GET", body = null) {
+    const url = config.apiBaseUrl + path;
+
+    const options = {
+      method,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+    };
+
+    if (body !== null) {
+      options.body = JSON.stringify(body);
+    }
+
+    return fetch(url, options);
+  }
+
+  //* GET all courses
+  async getCourses() {
+    const res = await this.api(`/courses`, "GET", null);
+
+    if (res.status === 200) {
+      return res.json().then((data) => data);
+    } else {
+      throw new Error();
+    }
+  }
+
+  //*   GET a Course
+  async getCourse(id) {
+    const res = await this.api(`/courses/${id}`, "GET", null);
+
+    if (res.status === 200) {
+      return res.json().then((data) => data);
+    } else if (res.status === 404) {
+      return null;
+    } else {
+      throw new Error();
+    }
+  }
+
+  //* POST a course
+  async createCourse(course) {
+    const res = await this.api(`/courses`, "POST", course);
+
+    if (res.status === 201) {
+      return [];
+    } else if (res.status === 400) {
+      return res.json().then((data) => {
+        return data.errors;
+      });
+    } else {
+      throw new Error();
+    }
+  }
+
+  //* GET a user
+  async getUser() {
+    const response = await this.api(`/users`, "GET", null);
+
+    if (response.status === 200) {
+      return response.json().then((data) => data);
+    } else if (response.status === 401) {
+      return null;
+    } else {
+      throw new Error();
+    }
+  }
+
+  //* Create a user
+  async createUser(user) {
+    const response = await this.api("/users", "POST", user);
+
+    if (response.status === 201) {
+      return [];
+    } else if (response.status === 400) {
+      return response.json().then((data) => {
+        return data.errors;
+      });
+    } else {
+      throw new Error();
+    }
+  }
+}
