@@ -60,6 +60,7 @@ const UserSignUp = () => {
           console.log(
             `${emailAddress} is successfully signed up and Authenticated!`
           );
+          history.push(`/`);
         }
       })
       .catch((err) => {
@@ -122,14 +123,6 @@ const UserSignUp = () => {
             value={password}
           />
 
-          <label htmlFor="confirmedPassword">Confirm Password</label>
-          <input
-            id="confirmedPassword"
-            name="confirmedPassword"
-            type="password"
-            onChange={handleValueChange}
-            value={confirmedPassword}
-          />
           <button className="button" type="submit">
             Sign Up
           </button>

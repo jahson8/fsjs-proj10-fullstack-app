@@ -28,13 +28,13 @@ const UserSignIn = () => {
     actions
       .signIn(email, password)
       .then((user) => {
-        if (!user) {
-          setErrors("Sign-in was unsuccessful");
+        if (user === null) {
+          setErrors(["Sign-in was unsuccessful"]);
+          console.log(errors);
         } else {
           history.push("/");
           console.log(`SUCCESS! ${email} is now signed in!`);
         }
-        console.log(errors);
       })
       .catch((err) => {
         console.log(err);

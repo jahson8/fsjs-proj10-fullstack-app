@@ -26,8 +26,7 @@ export default class Data {
       const encodedCredentials = btoa(
         `${credentials.username}:${credentials.password}`
       );
-
-      options.headers[`Authorization`] = `Basic ${encodedCredentials}`;
+      options.headers["Authorization"] = `Basic ${encodedCredentials}`;
     }
 
     return fetch(url, options);
@@ -78,7 +77,6 @@ export default class Data {
       username,
       password,
     });
-
     if (response.status === 200) {
       return response.json().then((data) => data);
     } else if (response.status === 401) {
@@ -90,9 +88,7 @@ export default class Data {
 
   //* Create a user
   async createUser(user) {
-    console.log(user);
     const response = await this.api("/users", "POST", user);
-
     if (response.status === 201) {
       return [];
     } else if (response.status === 400) {

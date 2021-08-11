@@ -6,8 +6,8 @@ export const Context = React.createContext();
 export const Provider = (props) => {
   const data = new Data();
 
-  const signIn = async (emailAddress, password) => {
-    const user = await data.getUser(emailAddress, password);
+  const signIn = async (username, password) => {
+    const user = await data.getUser(username, password);
     return user;
   };
 
