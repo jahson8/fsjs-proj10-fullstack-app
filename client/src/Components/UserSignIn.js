@@ -9,7 +9,6 @@ const UserSignIn = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  //
   const history = useHistory();
 
   //* import context functions
@@ -30,7 +29,6 @@ const UserSignIn = () => {
       .then((user) => {
         if (user === null) {
           setErrors(["Sign-in was unsuccessful"]);
-          console.log(errors);
         } else {
           history.push("/");
           console.log(`SUCCESS! ${email} is now signed in!`);
