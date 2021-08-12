@@ -9,6 +9,7 @@ export const Provider = (props) => {
   // * State variables
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
+  // * Function to signin User
   const signIn = async (emailAddress, password) => {
     const user = await data.getUser(emailAddress, password);
     if (user !== null) {
@@ -17,13 +18,17 @@ export const Provider = (props) => {
     return user;
   };
 
-  const signOut = () => {};
+  // *
+  const signOut = () => {
+    setAuthenticatedUser(null);
+  };
 
   const value = {
     authenticatedUser,
     data,
     actions: {
       signIn,
+      signOut,
     },
   };
 

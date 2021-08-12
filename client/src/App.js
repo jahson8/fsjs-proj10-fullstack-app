@@ -10,6 +10,7 @@ import UserSignIn from "./Components/UserSignIn";
 import UserSignUp from "./Components/UserSignUp";
 import CreateCourse from "./Components/CreateCourse";
 import UpdateCourse from "./Components/UpdateCourse";
+import UserSignOut from "./Components/UserSignOut";
 import NotFound from "./Components/NotFound";
 
 const App = () => {
@@ -39,6 +40,10 @@ const App = () => {
 
         <Route path="/signup">
           <UserSignUp />
+        </Route>
+
+        <Route path="/signout">
+          <UserSignOut />
         </Route>
 
         <Route>

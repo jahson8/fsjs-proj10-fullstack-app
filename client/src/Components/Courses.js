@@ -41,7 +41,7 @@ const Courses = () => {
 
         <Link
           className="course--module course--add--module"
-          to="create-course.html"
+          to="/courses/create"
         >
           <span className="course--add--title">
             <svg

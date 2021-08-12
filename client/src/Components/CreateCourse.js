@@ -1,13 +1,18 @@
 //* React and React Router imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 
 const CreateCourse = () => {
+  //* State variables
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [time, setTime] = useState("");
   const [materials, setMaterials] = useState("");
+  const [errors, setErrors] = useState([]);
 
-  // event handler
+  const history = useHistory();
+
+  //* input event handler
   const handleValueChange = (evt) => {
     const target = evt.target;
     const name = target.name;
@@ -85,7 +90,7 @@ const CreateCourse = () => {
           </button>
           <button
             className="button button-secondary"
-            // onclick="event.preventDefault(); location.href='index.html';"
+            onClick={() => history.push("/")}
           >
             Cancel
           </button>
