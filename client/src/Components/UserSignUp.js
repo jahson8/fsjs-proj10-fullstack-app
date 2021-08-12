@@ -3,6 +3,9 @@ import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../Context";
 
+//* Component imports
+import ErrorDisplay from "./ErrorDisplay";
+
 const UserSignUp = () => {
   // Get context
   const { data } = useContext(Context);
@@ -74,16 +77,7 @@ const UserSignUp = () => {
     <main>
       <div className="form--centered">
         <h2>Sign Up</h2>
-        {errors.length ? (
-          <div className="validation--errors">
-            <h3>Validation Errors</h3>
-            <ul>
-              {errors.map((err, index) => (
-                <li key={index}>{err}</li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
+        {errors.length ? <ErrorDisplay errors={errors} /> : null}
         <form
           onSubmit={(evt) => {
             evt.preventDefault();

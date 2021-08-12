@@ -3,6 +3,9 @@ import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../Context";
 
+//* Component Imports
+import ErrorDisplay from "./ErrorDisplay";
+
 const UserSignIn = () => {
   //* State variables
   const [email, setEmail] = useState("");
@@ -44,16 +47,7 @@ const UserSignIn = () => {
     <main>
       <div className="form--centered">
         <h2>Sign In</h2>
-        {errors.length ? (
-          <div className="validation--errors">
-            <h3>Validation Errors</h3>
-            <ul>
-              {errors.map((err, index) => (
-                <li key={index}>{err}</li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
+        {errors.length ? <ErrorDisplay errors={errors} /> : null}
         <form
           onSubmit={(evt) => {
             evt.preventDefault();
