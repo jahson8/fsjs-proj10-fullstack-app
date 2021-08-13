@@ -8,19 +8,21 @@ import ErrorDisplay from "./ErrorDisplay";
 
 const CreateCourse = () => {
   // * Get context
-  const { data, authenticatedUser } = useContext(Context);
+  const { data, authenticatedUser, userPassword } = useContext(Context);
   const authUser = authenticatedUser[0];
 
   //* State variables
   const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [time, setTime] = useState("");
-  const [materials, setMaterials] = useState("");
+  const [description, setDescription] = useState("");
+  const [estimatedTime, setEstimatedTime] = useState("");
+  const [materialsNeeded, setMaterials] = useState("");
   const [errors, setErrors] = useState([]);
+
   const { emailAddress } = authUser;
   const { firstName } = authUser;
   const { lastName } = authUser;
 
+  // * get access to browser history
   const history = useHistory();
 
   //* input event handler
@@ -34,10 +36,10 @@ const CreateCourse = () => {
         setTitle(value);
         break;
       case "courseDescription":
-        setDesc(value);
+        setDescription(value);
         break;
       case "estimatedTime":
-        setTime(value);
+        setEstimatedTime(value);
         break;
       default:
         setMaterials(value);
@@ -49,16 +51,19 @@ const CreateCourse = () => {
     // * New Course payload
     const course = {
       title,
-      desc,
-      time,
-      materials,
+      description,
+      estimatedTime,
+      materialsNeeded,
     };
 
     data
-      .createCourse(course, emailAddress)
+      .createCourse(course, emailAddress, userPassword)
       .then((errors) => {
         if (errors.length) {
           setErrors(errors);
+        } else {
+          console.log(`Course: ${title} successfully created`);
+          history.push(`/`);
         }
       })
       .catch((err) => console.log(err));
@@ -92,7 +97,7 @@ const CreateCourse = () => {
               <textarea
                 id="courseDescription"
                 name="courseDescription"
-                value={desc}
+                value={description}
                 onChange={handleValueChange}
               ></textarea>
             </div>
@@ -102,7 +107,7 @@ const CreateCourse = () => {
                 id="estimatedTime"
                 name="estimatedTime"
                 type="text"
-                value={time}
+                value={estimatedTime}
                 onChange={handleValueChange}
               />
 
@@ -110,7 +115,7 @@ const CreateCourse = () => {
               <textarea
                 id="materialsNeeded"
                 name="materialsNeeded"
-                value={materials}
+                value={materialsNeeded}
                 onChange={handleValueChange}
               ></textarea>
             </div>
