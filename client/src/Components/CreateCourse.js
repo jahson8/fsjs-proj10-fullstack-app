@@ -9,6 +9,7 @@ import ErrorDisplay from "./ErrorDisplay";
 const CreateCourse = () => {
   // * Get context
   const { data, authenticatedUser } = useContext(Context);
+  const authUser = authenticatedUser[0];
 
   //* State variables
   const [title, setTitle] = useState("");
@@ -16,8 +17,9 @@ const CreateCourse = () => {
   const [time, setTime] = useState("");
   const [materials, setMaterials] = useState("");
   const [errors, setErrors] = useState([]);
-  const { emailAddress } = authenticatedUser;
-  const { id } = authenticatedUser;
+  const { emailAddress } = authUser;
+  const { firstName } = authUser;
+  const { lastName } = authUser;
 
   const history = useHistory();
 
@@ -50,7 +52,6 @@ const CreateCourse = () => {
       desc,
       time,
       materials,
-      id,
     };
 
     data
@@ -85,7 +86,7 @@ const CreateCourse = () => {
                 onChange={handleValueChange}
               />
 
-              <p>By Joe Smith</p>
+              <p>{`By ${firstName} ${lastName}`}</p>
 
               <label htmlFor="courseDescription">Course Description</label>
               <textarea

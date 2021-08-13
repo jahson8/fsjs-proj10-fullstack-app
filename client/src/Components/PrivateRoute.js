@@ -6,7 +6,7 @@ import { Context } from "../Context";
 //* Higher  order component for protected routes
 const PrivateRoute = ({ children, ...rest }) => {
   const { authenticatedUser } = useContext(Context);
-  console.log(authenticatedUser);
+
   return (
     <Route
       {...rest}

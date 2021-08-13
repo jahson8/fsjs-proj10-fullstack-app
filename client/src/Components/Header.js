@@ -5,7 +5,8 @@ import { Context } from "../Context";
 
 const Header = () => {
   const { authenticatedUser } = useContext(Context);
-  const authUser = authenticatedUser;
+
+  console.log();
   return (
     <header>
       <div className="wrap header--flex">
@@ -13,9 +14,9 @@ const Header = () => {
           <Link to="/">Courses</Link>
         </h1>
         <nav>
-          {authUser ? (
+          {authenticatedUser ? (
             <React.Fragment>
-              <span>Welcome, {authUser.firstName}!</span>
+              <span>Welcome, {authenticatedUser[0].firstName}!</span>
               {"  "}
               <Link to="/signout">Sign Out</Link>{" "}
             </React.Fragment>

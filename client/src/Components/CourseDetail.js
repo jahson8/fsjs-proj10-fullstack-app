@@ -1,14 +1,16 @@
 //* React and React Router imports
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Context } from "../Context";
+
+// *Component Imports
+import ActionsBar from "./ActionsBar";
 
 const CourseDetail = () => {
   // Get context variables
   const { data, authenticatedUser } = useContext(Context);
 
   let { id } = useParams();
-  let { pathname } = useLocation();
 
   const [course, setCourse] = useState({});
   const [user, setUser] = useState({});
@@ -28,20 +30,8 @@ const CourseDetail = () => {
   }, [data, id]);
   return (
     <main>
-      {authenticatedUser && authenticatedUser.id === user.id ? (
-        <div className="actions--bar">
-          <div className="wrap">
-            <Link className="button" to={pathname + "/update"}>
-              Update Course
-            </Link>
-            <Link className="button" to="#">
-              Delete Course
-            </Link>
-            <Link className="button button-secondary" to="/">
-              Return to List
-            </Link>
-          </div>
-        </div>
+      {authenticatedUser && authenticatedUser[0].id === user.id ? (
+        <ActionsBar />
       ) : null}
 
       <div className="wrap">
