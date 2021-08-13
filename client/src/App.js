@@ -12,6 +12,7 @@ import CreateCourse from "./Components/CreateCourse";
 import UpdateCourse from "./Components/UpdateCourse";
 import UserSignOut from "./Components/UserSignOut";
 import NotFound from "./Components/NotFound";
+import PrivateRoute from "./Components/PrivateRoute";
 
 const App = () => {
   return (
@@ -22,13 +23,13 @@ const App = () => {
           <Courses />
         </Route>
 
-        <Route path="/courses/create">
+        <PrivateRoute path="/courses/create">
           <CreateCourse />
-        </Route>
+        </PrivateRoute>
 
-        <Route path="/courses/:id/update">
+        <PrivateRoute path="/courses/:id/update">
           <UpdateCourse />
-        </Route>
+        </PrivateRoute>
 
         <Route path="/courses/:id">
           <CourseDetail />

@@ -7,7 +7,7 @@ import { Context } from "../Context";
 import ErrorDisplay from "./ErrorDisplay";
 
 const UserSignUp = () => {
-  // Get context
+  //* Get context
   const { data } = useContext(Context);
   const history = useHistory();
 

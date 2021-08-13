@@ -1,25 +1,27 @@
 //* React and React Router imports
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { Consumer } from "../Context";
+import { Context } from "../Context";
 
 //* Higher  order component for protected routes
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ children, ...rest }) => {
+  const { authenticatedUser } = useContext(Context);
+  console.log(authenticatedUser);
   return (
-    <Consumer>
-      {(context) => (
-        <Route
-          {...rest}
-          render={(props) =>
-            context.authenticateUser ? (
-              <Component {...props} />
-            ) : (
-              <Redirect to="/signin" />
-            )
-          }
-        />
-      )}
-    </Consumer>
+    <Route
+      {...rest}
+      render={({ location }) =>
+        authenticatedUser ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/signin",
+            }}
+          />
+        )
+      }
+    />
   );
 };
 

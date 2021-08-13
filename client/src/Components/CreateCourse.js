@@ -1,14 +1,23 @@
 //* React and React Router imports
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
+import { Context } from "../Context";
+
+// *Component imports
+import ErrorDisplay from "./ErrorDisplay";
 
 const CreateCourse = () => {
+  // * Get context
+  const { data, authenticatedUser } = useContext(Context);
+
   //* State variables
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [time, setTime] = useState("");
   const [materials, setMaterials] = useState("");
   const [errors, setErrors] = useState([]);
+  const { emailAddress } = authenticatedUser;
+  const { id } = authenticatedUser;
 
   const history = useHistory();
 
@@ -33,18 +42,38 @@ const CreateCourse = () => {
     }
   };
 
+  // * Handle form submission
+  const handleSubmit = () => {
+    // * New Course payload
+    const course = {
+      title,
+      desc,
+      time,
+      materials,
+      id,
+    };
+
+    data
+      .createCourse(course, emailAddress)
+      .then((errors) => {
+        if (errors.length) {
+          setErrors(errors);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <main>
       <div className="wrap">
         <h2>Create Course</h2>
-        <div className="validation--errors">
-          <h3>Validation Errors</h3>
-          <ul>
-            <li>Please provide a value for "Title"</li>
-            <li>Please provide a value for "Description"</li>
-          </ul>
-        </div>
-        <form>
+        {errors.length ? <ErrorDisplay errors={errors} /> : null}
+        <form
+          onSubmit={(evt) => {
+            evt.preventDefault();
+            handleSubmit();
+          }}
+        >
           <div className="main--flex">
             <div>
               <label htmlFor="courseTitle">Course Title</label>

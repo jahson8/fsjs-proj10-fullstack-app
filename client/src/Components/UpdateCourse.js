@@ -1,7 +1,10 @@
 //* React and React Router imports
 import React from "react";
+import { useHistory } from "react-router";
 
 const UpdateCourse = () => {
+  const history = useHistory();
+
   return (
     <main>
       <div className="wrap">
@@ -79,7 +82,7 @@ const UpdateCourse = () => {
           </button>
           <button
             className="button button-secondary"
-            onclick="event.preventDefault(); location.href='index.html';"
+            onClick={() => history.push("/")}
           >
             Cancel
           </button>
