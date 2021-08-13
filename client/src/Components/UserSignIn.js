@@ -1,6 +1,6 @@
 //* React and React Router imports
 import React, { useState, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { Context } from "../Context";
 
 //* Component Imports
@@ -12,7 +12,10 @@ const UserSignIn = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
+  //* React Router Hooks and variables
   const history = useHistory();
+  const location = useLocation();
+  let { from } = location.state || { from: { pathname: "/" } };
 
   //* import context functions
   const { actions } = useContext(Context);
@@ -33,7 +36,7 @@ const UserSignIn = () => {
         if (user === null) {
           setErrors(["Sign-in was unsuccessful"]);
         } else {
-          history.push("/");
+          history.push(from);
           console.log(`SUCCESS! ${email} is now signed in!`);
         }
       })

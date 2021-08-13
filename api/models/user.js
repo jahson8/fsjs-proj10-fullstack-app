@@ -78,10 +78,6 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "Please provide a password",
           },
-          len: {
-            args: [6, 10],
-            msg: "Your password should be between 6 and 10 characters long",
-          },
         },
       },
     },

@@ -8,7 +8,7 @@ import ErrorDisplay from "./ErrorDisplay";
 
 const UserSignUp = () => {
   //* Get context
-  const { data } = useContext(Context);
+  const { data, actions } = useContext(Context);
   const history = useHistory();
 
   //* State variables
@@ -63,7 +63,7 @@ const UserSignUp = () => {
           console.log(
             `${emailAddress} is successfully signed up and Authenticated!`
           );
-          history.push(`/`);
+          actions.signIn(emailAddress, password).then(() => history.push(`/`));
         }
       })
       .catch((err) => {
