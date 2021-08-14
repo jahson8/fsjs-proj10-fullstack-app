@@ -74,6 +74,21 @@ export default class Data {
     }
   }
 
+  async updateCourse(course, id, username, password) {
+    const res = await this.api(`/courses/${id}`, "PUT", course, true, {
+      username,
+      password,
+    });
+
+    if (res.status === 204) {
+      return [];
+    } else if (res.status === 400) {
+      return res.json().then((data) => data.errors);
+    } else {
+      throw new Error();
+    }
+  }
+
   //* GET a user
   async getUser(username, password) {
     const response = await this.api(`/users`, "GET", null, true, {

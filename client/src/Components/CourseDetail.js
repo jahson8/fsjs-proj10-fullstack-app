@@ -1,15 +1,17 @@
 //* React and React Router imports
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Context } from "../Context";
 
 // *Component Imports
 import ActionsBar from "./ActionsBar";
 
 const CourseDetail = () => {
-  // Get context variables
+  //*  context variables
   const { data, authenticatedUser } = useContext(Context);
 
+  // * ROuter hooks
+  const history = useHistory();
   let { id } = useParams();
 
   const [course, setCourse] = useState({});
@@ -25,9 +27,10 @@ const CourseDetail = () => {
         }
       })
       .catch((error) => {
-        console.log("Error fetching and parsing data", error);
+        console.log("Error fetching course", error);
+        history.push("/error");
       });
-  }, [data, id]);
+  }, [data, id, history]);
   return (
     <main>
       {authenticatedUser && authenticatedUser[0].id === user.id ? (
@@ -41,7 +44,7 @@ const CourseDetail = () => {
             <div>
               <h3 className="course--detail--title">Course</h3>
               <h4 className="course--name">Build a Basic Bookcase</h4>
-              <p>By Joe Smith</p>
+              <p>{`By ${user.firstName} ${user.lastName}`}</p>
 
               <p>
                 High-end furniture projects are great to dream about. But unless

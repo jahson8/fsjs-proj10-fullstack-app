@@ -19,7 +19,7 @@ const Courses = () => {
       .then((res) => setCourses(res))
       .catch((error) => {
         console.log("Error fetching and parsing data", error);
-        history.push("/error");
+        // history.push("/error");
       });
   }, [data, history]);
 

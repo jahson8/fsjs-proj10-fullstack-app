@@ -68,7 +68,7 @@ const UserSignUp = () => {
       })
       .catch((err) => {
         // handle rejected promises
-        console.log(err);
+        console.log("Error with sign up", err);
         history.push("/error");
       });
   };

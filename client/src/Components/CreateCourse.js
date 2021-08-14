@@ -56,6 +56,7 @@ const CreateCourse = () => {
       materialsNeeded,
     };
 
+    // * add course funtionality
     data
       .createCourse(course, emailAddress, userPassword)
       .then((errors) => {
