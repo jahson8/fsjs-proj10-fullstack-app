@@ -1,4 +1,4 @@
-//* React and React Router imports
+//* React React Router and Context imports
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { Context } from "../Context";

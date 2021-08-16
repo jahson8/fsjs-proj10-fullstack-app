@@ -1,25 +1,25 @@
-//* React and React Router imports
+//* React ,React Router and Context imports
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../Context";
 
 const Courses = () => {
-  // Get context variables
+  //* Get context variables
   const { data } = useContext(Context);
 
-  // Set state variables
+  //* Set state variables
   const [courses, setCourses] = useState([]);
 
   const history = useHistory();
 
-  // Get All Courses
+  //* Get All Courses
   useEffect(() => {
     data
       .getCourses()
       .then((res) => setCourses(res))
       .catch((error) => {
         console.log("Error fetching and parsing data", error);
-        // history.push("/error");
+        history.push("/error");
       });
   }, [data, history]);
 

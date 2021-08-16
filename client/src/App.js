@@ -13,6 +13,7 @@ import UpdateCourse from "./Components/UpdateCourse";
 import UserSignOut from "./Components/UserSignOut";
 import NotFound from "./Components/NotFound";
 import Forbidden from "./Components/Forbidden";
+import Error from "./Components/Error";
 import PrivateRoute from "./Components/PrivateRoute";
 
 const App = () => {
@@ -53,7 +54,7 @@ const App = () => {
         </Route>
 
         <Route path="/error">
-          <Forbidden />
+          <Error />
         </Route>
 
         <Route>

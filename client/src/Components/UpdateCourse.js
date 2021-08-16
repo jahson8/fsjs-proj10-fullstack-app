@@ -19,7 +19,7 @@ const UpdateCourse = () => {
   const { data, authenticatedUser, userPassword } = useContext(Context);
   const { emailAddress } = authenticatedUser[0];
 
-  // Router hooks
+  //* Router hooks
   const { id } = useParams();
   const history = useHistory();
 
@@ -38,7 +38,10 @@ const UpdateCourse = () => {
           history.push("/NotFound");
         }
       })
-      .catch();
+      .catch((error) => {
+        console.log("Error fetching course", error);
+        history.push("/error");
+      });
   }, [id, data, history]);
 
   //* input event handler

@@ -1,4 +1,4 @@
-//* React and React Router imports
+//* React React Router and Context imports
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { Context } from "../Context";
