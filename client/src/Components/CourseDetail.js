@@ -8,10 +8,11 @@ import ReactMarkdown from "react-markdown";
 
 // *Component Imports
 import ActionsBar from "./ActionsBar";
+import Modal from "./Modal";
 
 const CourseDetail = () => {
   //*  context variables
-  const { data, authenticatedUser } = useContext(Context);
+  const { data, authenticatedUser, userPassword } = useContext(Context);
 
   // * Router hooks
   const history = useHistory();
@@ -20,7 +21,9 @@ const CourseDetail = () => {
   // * State variables
   const [course, setCourse] = useState({});
   const [user, setUser] = useState({});
+  const [show, setShow] = useState(false);
 
+  // * Fetch the corresponding course
   useEffect(() => {
     data
       .getCourse(id)
@@ -38,10 +41,34 @@ const CourseDetail = () => {
       });
   }, [data, id, history]);
 
+  //* Delete course
+  const deleteCourse = () => {
+    data
+      .deleteCourse(id, authenticatedUser[0].emailAddress, userPassword)
+      .then(() => {
+        history.push("/");
+        console.log(`Course: ${course.title} successfully deleted`);
+      })
+      .catch((err) => {
+        // handle rejected promises
+        console.log("Error deleting course", err);
+        history.push("/error");
+      });
+  };
+
+  //* modal visibility functions
+  const showModal = () => {
+    setShow(true);
+  };
+
+  const hideModal = () => {
+    setShow(false);
+  };
+
   return (
     <main>
       {authenticatedUser && authenticatedUser[0].id === user.id ? (
-        <ActionsBar />
+        <ActionsBar handleShow={showModal} />
       ) : null}
 
       <div className="wrap">
@@ -77,6 +104,7 @@ const CourseDetail = () => {
           </div>
         </form>
       </div>
+      <Modal handleClose={hideModal} show={show} handleDelete={deleteCourse} />
     </main>
   );
 };

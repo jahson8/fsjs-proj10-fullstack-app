@@ -2,7 +2,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const ActionsBar = () => {
+const ActionsBar = ({ handleShow }) => {
   let { pathname } = useLocation();
 
   return (
@@ -11,7 +11,7 @@ const ActionsBar = () => {
         <Link className="button" to={pathname + "/update"}>
           Update Course
         </Link>
-        <Link className="button" to="#">
+        <Link className="button" onClick={handleShow}>
           Delete Course
         </Link>
         <Link className="button button-secondary" to="/">
