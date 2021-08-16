@@ -2,18 +2,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NotFound = () => {
+const Error = () => {
   return (
     <main>
       <div className="wrap">
-        <h2>Page Not Found</h2>
+        <h2>Error</h2>
         <p>
-          Sorry! We couldn't find the page you're looking for. Return to{" "}
-          <Link to="/">Homepage Page</Link>
+          Oops! There seems to be a problem. Please try your request again
+          later. Return to <Link to="/">Homepage Page</Link>
         </p>
       </div>
     </main>
   );
 };
 
-export default NotFound;
+export default Error;

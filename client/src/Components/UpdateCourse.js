@@ -1,6 +1,6 @@
-//* React and React Router imports
+//* React React Router and Context imports
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams, Redirect } from "react-router";
 import { Context } from "../Context";
 
 // * Component imports
@@ -15,12 +15,13 @@ const UpdateCourse = () => {
   const [userInfo, setUserInfo] = useState({});
   const [errors, setErrors] = useState([]);
 
-  // * Get context
+  // * context variables
   const { data, authenticatedUser, userPassword } = useContext(Context);
   const { emailAddress } = authenticatedUser[0];
 
   // Router hooks
   const { id } = useParams();
+  const history = useHistory();
 
   // * fetch the course to update
   useEffect(() => {
@@ -33,12 +34,12 @@ const UpdateCourse = () => {
           setEstimatedTime(res.estimatedTime);
           setMaterials(res.materialsNeeded);
           setUserInfo(res.userInfo);
+        } else {
+          history.push("/NotFound");
         }
       })
       .catch();
-  }, [id, data]);
-
-  const history = useHistory();
+  }, [id, data, history]);
 
   //* input event handler
   const handleValueChange = (evt) => {
@@ -85,72 +86,76 @@ const UpdateCourse = () => {
       .catch((err) => {
         // handle rejected promises
         console.log("Error with course update", err);
-        // history.push("/error");
+        history.push("/error");
       });
   };
 
   return (
     <main>
-      <div className="wrap">
-        <h2>Update Course</h2>
-        {errors.length ? <ErrorDisplay errors={errors} /> : null}
-        <form
-          onSubmit={(evt) => {
-            evt.preventDefault();
-            handleSubmit();
-          }}
-        >
-          <div className="main--flex">
-            <div>
-              <label htmlFor="courseTitle">Course Title</label>
-              <input
-                id="courseTitle"
-                name="courseTitle"
-                type="text"
-                value={title}
-                onChange={handleValueChange}
-              />
-
-              <p>{`By ${userInfo.firstName} ${userInfo.lastName}`}</p>
-
-              <label htmlFor="courseDescription">Course Description</label>
-              <textarea
-                id="courseDescription"
-                name="courseDescription"
-                value={description}
-                onChange={handleValueChange}
-              ></textarea>
-            </div>
-            <div>
-              <label htmlFor="estimatedTime">Estimated Time</label>
-              <input
-                id="estimatedTime"
-                name="estimatedTime"
-                type="text"
-                value={estimatedTime}
-                onChange={handleValueChange}
-              />
-
-              <label htmlFor="materialsNeeded">Materials Needed</label>
-              <textarea
-                id="materialsNeeded"
-                name="materialsNeeded"
-                value={materialsNeeded}
-                onChange={handleValueChange}
-              ></textarea>
-            </div>
-          </div>
-          <button className="button" type="submit">
-            Update Course
-          </button>
-          <button
-            className="button button-secondary"
-            onClick={() => history.push("/")}
+      {authenticatedUser && authenticatedUser[0].id === userInfo.id ? (
+        <div className="wrap">
+          <h2>Update Course</h2>
+          {errors.length ? <ErrorDisplay errors={errors} /> : null}
+          <form
+            onSubmit={(evt) => {
+              evt.preventDefault();
+              handleSubmit();
+            }}
           >
-            Cancel
-          </button>
-        </form>
-      </div>
+            <div className="main--flex">
+              <div>
+                <label htmlFor="courseTitle">Course Title</label>
+                <input
+                  id="courseTitle"
+                  name="courseTitle"
+                  type="text"
+                  value={title}
+                  onChange={handleValueChange}
+                />
+
+                <p>{`By ${userInfo.firstName} ${userInfo.lastName}`}</p>
+
+                <label htmlFor="courseDescription">Course Description</label>
+                <textarea
+                  id="courseDescription"
+                  name="courseDescription"
+                  value={description}
+                  onChange={handleValueChange}
+                ></textarea>
+              </div>
+              <div>
+                <label htmlFor="estimatedTime">Estimated Time</label>
+                <input
+                  id="estimatedTime"
+                  name="estimatedTime"
+                  type="text"
+                  value={estimatedTime}
+                  onChange={handleValueChange}
+                />
+
+                <label htmlFor="materialsNeeded">Materials Needed</label>
+                <textarea
+                  id="materialsNeeded"
+                  name="materialsNeeded"
+                  value={materialsNeeded}
+                  onChange={handleValueChange}
+                ></textarea>
+              </div>
+            </div>
+            <button className="button" type="submit">
+              Update Course
+            </button>
+            <button
+              className="button button-secondary"
+              onClick={() => history.push("/")}
+            >
+              Cancel
+            </button>
+          </form>
+        </div>
+      ) : (
+        <Redirect to="/forbidden" />
+      )}
     </main>
   );
 };

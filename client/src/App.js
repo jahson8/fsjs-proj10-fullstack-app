@@ -12,6 +12,7 @@ import CreateCourse from "./Components/CreateCourse";
 import UpdateCourse from "./Components/UpdateCourse";
 import UserSignOut from "./Components/UserSignOut";
 import NotFound from "./Components/NotFound";
+import Forbidden from "./Components/Forbidden";
 import PrivateRoute from "./Components/PrivateRoute";
 
 const App = () => {
@@ -45,6 +46,14 @@ const App = () => {
 
         <Route path="/signout">
           <UserSignOut />
+        </Route>
+
+        <Route path="/forbidden">
+          <Forbidden />
+        </Route>
+
+        <Route path="/error">
+          <Forbidden />
         </Route>
 
         <Route>

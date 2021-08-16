@@ -1,4 +1,4 @@
-//* React and React Router imports
+//* React ,React Router and Context imports
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Context } from "../Context";
@@ -13,10 +13,11 @@ const CourseDetail = () => {
   //*  context variables
   const { data, authenticatedUser } = useContext(Context);
 
-  // * ROuter hooks
+  // * Router hooks
   const history = useHistory();
   let { id } = useParams();
 
+  // * State variables
   const [course, setCourse] = useState({});
   const [user, setUser] = useState({});
 
@@ -27,6 +28,8 @@ const CourseDetail = () => {
         if (res) {
           setCourse(res);
           setUser(res.userInfo);
+        } else {
+          history.push("/NotFound");
         }
       })
       .catch((error) => {
@@ -34,6 +37,7 @@ const CourseDetail = () => {
         history.push("/error");
       });
   }, [data, id, history]);
+
   return (
     <main>
       {authenticatedUser && authenticatedUser[0].id === user.id ? (
