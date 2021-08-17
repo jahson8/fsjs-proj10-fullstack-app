@@ -80,7 +80,7 @@ export default class Data {
       username,
       password,
     });
-
+    console.log(res);
     if (res.status === 204) {
       return [];
     } else if (res.status === 400) {
@@ -98,7 +98,7 @@ export default class Data {
     });
 
     if (res.status === 204) {
-      return [];
+      return null;
     } else if (res.status === 403) {
       return null;
     } else {

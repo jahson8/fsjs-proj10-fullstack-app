@@ -33,11 +33,12 @@ export const Provider = (props) => {
     return user;
   };
 
-  // *
+  // * function to signout user
   const signOut = () => {
     setAuthenticatedUser(null);
     setUserPassword(null);
     cookies.remove("authenticatedUser", { path: "/" });
+    cookies.remove("credentials", { path: "/" });
   };
 
   const value = {

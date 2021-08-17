@@ -42,7 +42,8 @@ const CourseDetail = () => {
   }, [data, id, history]);
 
   //* Delete course
-  const deleteCourse = () => {
+  const deleteCourse = (evt) => {
+    evt.preventDefault();
     data
       .deleteCourse(id, authenticatedUser[0].emailAddress, userPassword)
       .then(() => {
@@ -57,11 +58,13 @@ const CourseDetail = () => {
   };
 
   //* modal visibility functions
-  const showModal = () => {
+  const showModal = (evt) => {
+    evt.preventDefault();
     setShow(true);
   };
 
-  const hideModal = () => {
+  const hideModal = (evt) => {
+    evt.preventDefault();
     setShow(false);
   };
 
@@ -70,6 +73,8 @@ const CourseDetail = () => {
       {authenticatedUser && authenticatedUser[0].id === user.id ? (
         <ActionsBar handleShow={showModal} />
       ) : null}
+
+      {}
 
       <div className="wrap">
         <h2>Course Detail</h2>
