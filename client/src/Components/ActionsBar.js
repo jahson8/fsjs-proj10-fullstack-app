@@ -24,7 +24,6 @@ const ActionsBar = ({ handleShow }) => {
       })
       .catch((error) => {
         console.log("Error fetching course", error);
-        history.push("/error");
       });
   }, [data, id, history]);
 
@@ -37,9 +36,9 @@ const ActionsBar = ({ handleShow }) => {
             <Link className="button" to={pathname + "/update"}>
               Update Course
             </Link>
-            <Link className="button" onClick={handleShow}>
+            <a className="button" onClick={handleShow} href="false">
               Delete Course
-            </Link>{" "}
+            </a>{" "}
           </>
         ) : null}
 

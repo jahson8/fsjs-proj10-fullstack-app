@@ -38,7 +38,6 @@ const UpdateCourse = () => {
             setMaterials(res.materialsNeeded);
             setUserInfo(res.userInfo);
             setIsloading(false);
-            console.log(res);
           } else {
             history.push("/forbidden");
           }
