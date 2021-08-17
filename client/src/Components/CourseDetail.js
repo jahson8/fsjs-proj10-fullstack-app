@@ -70,11 +70,7 @@ const CourseDetail = () => {
 
   return (
     <main>
-      {authenticatedUser && authenticatedUser[0].id === user.id ? (
-        <ActionsBar handleShow={showModal} />
-      ) : null}
-
-      {}
+      <ActionsBar handleShow={showModal} />
 
       <div className="wrap">
         <h2>Course Detail</h2>

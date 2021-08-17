@@ -33,9 +33,9 @@ const App = () => {
           <UpdateCourse />
         </PrivateRoute>
 
-        <PrivateRoute path="/courses/:id">
+        <Route path="/courses/:id">
           <CourseDetail />
-        </PrivateRoute>
+        </Route>
 
         <Route path="/signin">
           <UserSignIn />
