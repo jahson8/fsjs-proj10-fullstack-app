@@ -1,6 +1,6 @@
 # Full Stack App with React and a REST API
 
-In this project, React is used to create a client for an existing school database [link](https://github.com/jahson8/fsjs-proj9-REST-API)REST API. The full stack application will provide a way for users to administer a database containing information about courses: users can interact with the database by retrieving a list of courses, viewing detail for a specific course, as well as creating, updating and deleting courses in the database.In addition, the project requires users to create an account and sign in to make changes to the database.
+In this project, React is used to create a client for an [existing school database](https://github.com/jahson8/fsjs-proj9-REST-API)REST API. The full stack application will provide a way for users to administer a database containing information about courses: users can interact with the database by retrieving a list of courses, viewing detail for a specific course, as well as creating, updating and deleting courses in the database.In addition, the project requires users to create an account and sign in to make changes to the database.
 
 In This project:
 
