@@ -67,7 +67,10 @@ const CreateCourse = () => {
           history.push(`/`);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        history.push("/error");
+      });
   };
 
   return (

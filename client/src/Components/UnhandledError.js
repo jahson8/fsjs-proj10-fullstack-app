@@ -1,6 +1,5 @@
 //* React React Router imports
 import React from "react";
-import { Link } from "react-router-dom";
 
 const UnhandledError = () => {
   return (
@@ -9,7 +8,7 @@ const UnhandledError = () => {
         <h2>Error</h2>
         <p>
           Oops! There seems to be a problem. Please try your request again
-          later. Return to <Link to="/">Homepage Page</Link>
+          later.
         </p>
       </div>
     </main>

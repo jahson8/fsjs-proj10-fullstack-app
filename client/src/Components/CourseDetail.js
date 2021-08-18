@@ -32,7 +32,7 @@ const CourseDetail = () => {
           setCourse(res);
           setUser(res.userInfo);
         } else {
-          history.push("/NotFound");
+          history.push("/notfound");
         }
       })
       .catch((error) => {
